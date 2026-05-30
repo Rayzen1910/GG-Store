@@ -134,7 +134,7 @@ export default function AccountPage() {
           </div>
         )}
 
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex flex-col-reverse lg:flex-row-reverse gap-12">
           {/* Account Navigation / Profile Card */}
           <aside className="w-full lg:w-72 space-y-4">
             <div className="p-8 bg-bg-secondary border border-border-subtle rounded-sm text-center">
