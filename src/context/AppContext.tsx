@@ -254,7 +254,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const addProduct = async (newProduct: Omit<Product, 'id' | 'rating'>) => {
     const productData = {
       ...newProduct,
-      rating: 5.0,
+      rating: 0.0,
       images: [newProduct.image],
       soldCount: 0
     };

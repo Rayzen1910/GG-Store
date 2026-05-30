@@ -215,9 +215,16 @@ export default function CatalogPage() {
                       </div>
                     </div>
                     
-                    <h3 className="text-xs md:text-xl font-bold md:font-black md:italic uppercase tracking-tight md:tracking-tighter mb-2 group-hover:text-brand-red transition-colors leading-tight line-clamp-2 flex-grow">
+                    <h3 className="text-xs md:text-xl font-bold md:font-black md:italic uppercase tracking-tight md:tracking-tighter mb-1 group-hover:text-brand-red transition-colors leading-tight line-clamp-2">
                       {product.name}
                     </h3>
+                    {product.storeName ? (
+                      <p className="text-[8px] md:text-[10px] font-mono text-gray-400 mb-2 flex-grow uppercase tracking-widest">
+                        by <span className="text-brand-red font-bold">{product.storeName}</span>
+                      </p>
+                    ) : (
+                      <div className="mb-2 flex-grow"></div>
+                    )}
                     
                     <div className="flex items-center justify-between mt-auto mb-1">
                       <span className="text-brand-red font-bold text-sm md:text-2xl tracking-tight md:tracking-tighter">Rp {product.price.toLocaleString('id-ID')}</span>
