@@ -69,7 +69,7 @@ interface AppContextType {
   wishlist: string[];
   toggleWishlist: (productId: string) => void;
   reviews: Record<string, Review[]>;
-  addReview: (productId: string, rating: number, comment: string, userName: string) => void;
+  addReview: (productId: string, rating: number, comment: string, userName: string) => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -219,7 +219,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  const addReview = (productId: string, rating: number, comment: string, userName: string) => {
+  const addReview = async (productId: string, rating: number, comment: string, userName: string) => {
     const newReview: Review = {
       id: 'rev-' + Date.now(),
       userName: userName || 'Anonymous',
@@ -246,6 +246,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           p.id === productId ? { ...p, rating: averageRating } : p
         )
       );
+      
+      // Fire and forget the Supabase update so it persists to all users
+      supabase.from('products').update({ rating: averageRating }).eq('id', productId).then(({ error }) => {
+        if (error) console.error("Failed to update product rating in Supabase:", error);
+      });
       
       return updated;
     });

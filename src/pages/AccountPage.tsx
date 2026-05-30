@@ -66,6 +66,13 @@ export default function AccountPage() {
 
   const [notification, setNotification] = useState('');
 
+  // Review Modal State
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
+  const [reviewTarget, setReviewTarget] = useState<{ id: string, name: string, image: string } | null>(null);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewComment, setReviewComment] = useState('');
+  const { addReview } = useApp();
+
   const handleCreateStore = (e: React.FormEvent) => {
     e.preventDefault();
     if (!storeName.trim() || !storeDesc.trim()) return;
@@ -288,22 +295,14 @@ export default function AccountPage() {
                                 </div>
                                 <button
                                   onClick={() => {
-                                    addToCart({
-                                      id: item.id,
-                                      name: item.name,
-                                      price: item.price,
-                                      image: item.image,
-                                      rating: 5,
-                                      category: 'Gear',
-                                      type: 'accessory',
-                                      description: ''
-                                    }, item.color);
-                                    setNotification(`"${item.name}" added to cart!`);
-                                    setTimeout(() => setNotification(''), 3000);
+                                    setReviewTarget({ id: item.id, name: item.name, image: item.image });
+                                    setReviewRating(5);
+                                    setReviewComment('');
+                                    setReviewModalOpen(true);
                                   }}
                                   className="px-2 py-1 border border-brand-red/20 text-brand-red bg-brand-red/5 hover:bg-brand-red hover:text-brand-dark transition-all text-[9px] font-bold uppercase tracking-tighter rounded-sm cursor-pointer"
                                 >
-                                  Add to Cart
+                                  Write Review
                                 </button>
                               </div>
                             ))}
@@ -628,6 +627,81 @@ export default function AccountPage() {
           </section>
         </div>
       </main>
+
+      {/* Review Modal */}
+      {reviewModalOpen && reviewTarget && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-bg-primary border border-border-subtle p-6 rounded-sm w-full max-w-md shadow-2xl relative"
+          >
+            <h2 className="text-2xl font-black italic uppercase tracking-tighter mb-4">Write a Review</h2>
+            
+            <div className="flex gap-4 items-center bg-bg-secondary p-3 rounded-sm mb-6 border border-white/5">
+              <img src={reviewTarget.image} className="w-12 h-12 object-cover rounded-sm grayscale opacity-80" alt={reviewTarget.name} />
+              <div>
+                <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Rate Product</p>
+                <p className="font-bold text-sm leading-tight">{reviewTarget.name}</p>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-2">Select Rating</p>
+              <div className="flex gap-2">
+                {[1, 2, 3, 4, 5].map(star => (
+                  <button 
+                    key={star} 
+                    onClick={() => setReviewRating(star)}
+                    className="cursor-pointer"
+                  >
+                    <svg 
+                      width="32" height="32" viewBox="0 0 24 24" 
+                      fill={star <= reviewRating ? "#EF4444" : "none"} 
+                      stroke={star <= reviewRating ? "#EF4444" : "#4B5563"} 
+                      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                      className="transition-colors"
+                    >
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-2">Your Experience</p>
+              <textarea 
+                rows={4}
+                value={reviewComment}
+                onChange={(e) => setReviewComment(e.target.value)}
+                placeholder="How does the product perform? Does it meet your expectations?"
+                className="w-full bg-bg-secondary border border-border-subtle focus:border-brand-red rounded-sm p-4 text-sm text-text-primary focus:ring-0 transition-colors font-sans"
+              />
+            </div>
+
+            <div className="flex gap-3">
+              <button 
+                onClick={() => setReviewModalOpen(false)}
+                className="w-1/3 py-3 border border-border-subtle text-xs font-black uppercase tracking-widest hover:bg-white/5 transition-all rounded-sm cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => {
+                  addReview(reviewTarget.id, reviewRating, reviewComment, fullName);
+                  setReviewModalOpen(false);
+                  setNotification(`Review submitted for ${reviewTarget.name}!`);
+                  setTimeout(() => setNotification(''), 3000);
+                }}
+                className="w-2/3 py-3 bg-brand-red text-brand-dark text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all rounded-sm cursor-pointer"
+              >
+                Submit Review
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
 
       <Footer />
     </div>
