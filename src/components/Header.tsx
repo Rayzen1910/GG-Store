@@ -152,6 +152,15 @@ export default function Header() {
             {theme === 'light' ? <Moon className="w-5 h-5 sm:w-5 sm:h-5" strokeWidth={2.5} /> : <Sun className="w-5 h-5 sm:w-5 sm:h-5" strokeWidth={2.5} />}
           </button>
           
+          <Link to="/cart" className={`relative p-1.5 sm:p-2 hover:text-brand-red transition-colors ${location.pathname === '/cart' ? 'text-brand-red' : ''}`}>
+            <ShoppingBag className="w-5 h-5 sm:w-5 sm:h-5" strokeWidth={2.5} />
+            {totalCartItems > 0 && (
+              <span className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-brand-red text-brand-dark text-[9px] sm:text-[10px] font-black w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center rounded-full border-2 border-bg-primary transition-colors">
+                {totalCartItems}
+              </span>
+            )}
+          </Link>
+
           {user ? (
             <Link 
               to="/account" 
@@ -175,15 +184,6 @@ export default function Header() {
               <span className="hidden sm:inline">{t('login')}</span>
             </Link>
           )}
-
-          <Link to="/cart" className={`relative p-1.5 sm:p-2 hover:text-brand-red transition-colors ${location.pathname === '/cart' ? 'text-brand-red' : ''}`}>
-            <ShoppingBag className="w-5 h-5 sm:w-5 sm:h-5" strokeWidth={2.5} />
-            {totalCartItems > 0 && (
-              <span className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-brand-red text-brand-dark text-[9px] sm:text-[10px] font-black w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center rounded-full border-2 border-bg-primary transition-colors">
-                {totalCartItems}
-              </span>
-            )}
-          </Link>
         </div>
       </div>
 
