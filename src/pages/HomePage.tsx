@@ -48,7 +48,7 @@ export default function HomePage() {
             <span className="text-brand-red font-mono tracking-widest text-sm uppercase mb-4 block">
               {t('newCollection')}
             </span>
-            <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter mb-6 leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-black italic tracking-tighter mb-6 leading-tight">
               {t('builtFor')}<br />
               <span className="text-brand-red border-t-2 border-b-2 border-brand-red px-4 text-glow">
                 {t('precision')}
@@ -158,12 +158,12 @@ export default function HomePage() {
       <section className="py-24 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-brand-red transform -skew-y-3 origin-left z-0" />
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
-          <h2 className="text-brand-dark text-6xl font-black italic tracking-tighter uppercase mb-6 leading-none">
+          <h2 className="text-brand-dark text-4xl sm:text-5xl md:text-6xl font-black italic tracking-tighter uppercase mb-6 leading-none">
             {t('readyToUpgrade')}
           </h2>
           <Link 
             to="/catalog"
-            className="bg-text-primary text-bg-primary px-16 py-6 font-black rounded-sm flex items-center gap-3 hover:opacity-90 transition-all uppercase tracking-tighter shadow-2xl"
+            className="bg-text-primary text-bg-primary px-8 py-5 md:px-16 md:py-6 font-black rounded-sm flex items-center gap-3 hover:opacity-90 transition-all uppercase tracking-tighter shadow-2xl"
           >
             {t('goToShop')} <ChevronRight size={24} />
           </Link>

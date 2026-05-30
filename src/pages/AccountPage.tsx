@@ -227,28 +227,28 @@ export default function AccountPage() {
                   <div className="space-y-4">
                     {orders.map((order) => (
                       <div key={order.id} className="p-6 bg-bg-secondary border border-border-subtle rounded-sm hover:border-text-primary/20 transition-all group">
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 items-center">
-                          <div>
-                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Order #</p>
+                        <div className="flex flex-col md:grid md:grid-cols-5 gap-4 md:gap-6 md:items-center">
+                          <div className="flex justify-between items-center md:block">
+                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest md:mb-1">Order #</p>
                             <p className="font-bold uppercase tracking-tighter text-brand-red">{order.id}</p>
                           </div>
-                          <div className="hidden md:block">
-                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Date</p>
+                          <div className="flex justify-between items-center md:block">
+                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest md:mb-1">Date</p>
                             <p className="font-bold text-sm">{order.date}</p>
                           </div>
-                          <div>
-                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Status</p>
+                          <div className="flex justify-between items-center md:block">
+                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest md:mb-1">Status</p>
                             <span className="bg-emerald-500/10 text-emerald-500 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter">
                               {order.status}
                             </span>
                           </div>
-                          <div className="hidden md:block text-right">
-                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Total</p>
+                          <div className="flex justify-between items-center md:block md:text-right">
+                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest md:mb-1">Total</p>
                             <p className="font-black italic tracking-tighter text-brand-red">
                               Rp {order.total.toLocaleString('id-ID')}
                             </p>
                           </div>
-                          <div className="flex justify-end items-center gap-3">
+                          <div className="flex justify-between md:justify-end items-center gap-3 pt-2 md:pt-0 border-t border-border-subtle md:border-0 mt-2 md:mt-0">
                             <span className="text-xs font-mono text-gray-400">[{order.items} items]</span>
                             {order.details && order.details.length > 0 && (
                               <button

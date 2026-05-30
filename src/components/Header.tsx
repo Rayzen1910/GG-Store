@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ShoppingBag, User, Sun, Moon, LogIn, Globe, ChevronDown } from 'lucide-react';
+import { ShoppingBag, User, Sun, Moon, LogIn, Globe, ChevronDown, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext.tsx';
 import { useApp } from '../context/AppContext.tsx';
@@ -22,8 +22,10 @@ export default function Header() {
 
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [collectionsDropdownOpen, setCollectionsDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const collectionsRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -33,6 +35,9 @@ export default function Header() {
       }
       if (collectionsRef.current && !collectionsRef.current.contains(event.target as Node)) {
         setCollectionsDropdownOpen(false);
+      }
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node) && !(event.target as Element).closest('.mobile-menu-btn')) {
+        setMobileMenuOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -127,7 +132,16 @@ export default function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
+          {/* Mobile Menu Button */}
+          <button 
+            className="lg:hidden p-2 hover:text-brand-red transition-colors mobile-menu-btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Mobile Menu"
+          >
+            {mobileMenuOpen ? <X size={24} strokeWidth={2.5} /> : <Menu size={24} strokeWidth={2.5} />}
+          </button>
+
           {/* Language Selector Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
@@ -203,6 +217,39 @@ export default function Header() {
           </Link>
         </div>
       </div>
+
+      {/* Mobile Menu Panel */}
+      {mobileMenuOpen && (
+        <div ref={mobileMenuRef} className="lg:hidden absolute top-20 left-0 w-full bg-bg-secondary border-b border-border-subtle shadow-2xl animate-in fade-in slide-in-from-top-2 z-40">
+          <div className="flex flex-col p-6 space-y-6">
+            <Link 
+              to="/catalog" 
+              onClick={() => setMobileMenuOpen(false)}
+              className={`text-sm font-black uppercase tracking-widest hover:text-brand-red transition-colors ${location.pathname === '/catalog' && !location.search ? 'text-brand-red' : ''}`}
+            >
+              {t('hardware')}
+            </Link>
+            
+            <div className="space-y-3">
+              <span className="text-sm font-black uppercase tracking-widest text-gray-400">{t('collections')}</span>
+              <div className="flex flex-col pl-4 border-l-2 border-border-subtle space-y-4">
+                <Link to="/catalog?category=keyboard" onClick={() => setMobileMenuOpen(false)} className="text-xs font-mono font-bold hover:text-brand-red">⌨️ Keyboards</Link>
+                <Link to="/catalog?category=mouse" onClick={() => setMobileMenuOpen(false)} className="text-xs font-mono font-bold hover:text-brand-red">🖱️ Mice</Link>
+                <Link to="/catalog?category=audio" onClick={() => setMobileMenuOpen(false)} className="text-xs font-mono font-bold hover:text-brand-red">🎧 Audio</Link>
+                <Link to="/catalog?category=accessory" onClick={() => setMobileMenuOpen(false)} className="text-xs font-mono font-bold hover:text-brand-red">🎒 Accessories</Link>
+              </div>
+            </div>
+
+            <Link
+              to="/support"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`text-sm font-black uppercase tracking-widest hover:text-brand-red transition-colors ${location.pathname === '/support' ? 'text-brand-red' : ''}`}
+            >
+              {t('support')}
+            </Link>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
