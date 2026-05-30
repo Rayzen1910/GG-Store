@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <footer className="w-full border-t-8 border-brand-red bg-bg-primary mt-24 selection:bg-brand-red selection:text-brand-dark transition-colors duration-300">
-      <div className="grid grid-cols-4 md:grid-cols-12 gap-2 md:gap-12 px-4 lg:px-12 py-10 md:py-20 w-full max-w-7xl mx-auto">
+      <div className="grid grid-cols-3 md:grid-cols-12 gap-2 md:gap-12 px-4 lg:px-12 py-10 md:py-20 w-full max-w-7xl mx-auto">
         <div className="col-span-1 md:col-span-4">
           <Link to="/" className="text-[10px] md:text-3xl font-black text-brand-red uppercase italic tracking-tighter mb-2 md:mb-6 block">GG STORE</Link>
           <p className="text-gray-500 text-[6px] md:text-sm leading-tight md:leading-relaxed max-w-sm font-light hidden sm:block">
@@ -38,7 +38,7 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="col-span-1 md:col-span-4">
+        <div className="col-span-1 md:col-span-4 hidden md:block">
           <h4 className="font-mono text-[7px] md:text-[10px] font-bold text-text-primary mb-2 md:mb-8 uppercase tracking-[0.2em] opacity-50">Newsletter</h4>
           <p className="text-gray-500 text-[6px] md:text-xs mb-2 md:mb-6 uppercase tracking-tighter font-bold hidden sm:block">Join the waitlist for the next modular drop.</p>
           <div className="flex flex-col md:flex-row gap-1 md:gap-2">
