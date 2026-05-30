@@ -64,7 +64,7 @@ interface AppContextType {
   storeInfo: StoreInfo | null;
   createStore: (store: StoreInfo) => void;
   orders: Order[];
-  addOrder: (order: Order) => void;
+  addOrder: (order: Order) => Promise<void>;
   logout: () => void;
   wishlist: string[];
   toggleWishlist: (productId: string) => void;
@@ -316,8 +316,36 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setStoreInfo(store);
   };
 
-  const addOrder = (order: Order) => {
+  const addOrder = async (order: Order) => {
     setOrders(prev => [order, ...prev]);
+
+    // Automatically update product soldCount if order has details
+    if (order.details && order.details.length > 0) {
+      const soldMap: Record<string, number> = {};
+      order.details.forEach(item => {
+        soldMap[item.id] = (soldMap[item.id] || 0) + item.quantity;
+      });
+
+      setProducts(prevProducts => {
+        const newProducts = prevProducts.map(p => {
+          if (soldMap[p.id]) {
+            const newSoldCount = (p.soldCount || 0) + soldMap[p.id];
+            
+            // Fire and forget Supabase update
+            supabase.from('products')
+              .update({ soldCount: newSoldCount })
+              .eq('id', p.id)
+              .then(({ error }) => {
+                if (error) console.error("Failed to update product soldCount in Supabase:", error);
+              });
+
+            return { ...p, soldCount: newSoldCount };
+          }
+          return p;
+        });
+        return newProducts;
+      });
+    }
   };
 
   const logout = () => {
