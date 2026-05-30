@@ -152,7 +152,7 @@ export default function CatalogPage() {
             </div>
 
             {/* Product Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-6">
               {processedProducts.map((product, i) => (
                 <motion.div
                   key={product.id}
@@ -206,11 +206,10 @@ export default function CatalogPage() {
                       </Link>
                     </div>
                   </div>
-                  
-                  <div className="p-8 flex flex-col flex-grow">
-                    <div className="flex justify-between items-start mb-2">
-                      <p className="text-brand-red font-mono text-[10px] uppercase tracking-widest">{product.category}</p>
-                      <div className="flex items-center gap-1 text-[10px] text-gray-500 font-black uppercase tracking-widest">
+                  <div className="p-2 md:p-8 flex flex-col flex-grow">
+                    <div className="flex justify-between items-start mb-1 md:mb-2 flex-col md:flex-row gap-1">
+                      <p className="text-brand-red font-mono text-[8px] md:text-[10px] uppercase tracking-widest">{product.category}</p>
+                      <div className="flex items-center gap-1 text-[8px] md:text-[10px] text-gray-500 font-black uppercase tracking-widest">
                         <Star size={10} className="fill-brand-red text-brand-red" />
                         {product.rating}
                       </div>
@@ -227,20 +226,20 @@ export default function CatalogPage() {
                       </div>
                     )}
                     
-                    <h3 className="text-2xl font-black italic uppercase tracking-tighter mb-6 group-hover:text-brand-red transition-colors leading-none flex-grow">
+                    <h3 className="text-[10px] md:text-2xl font-black italic uppercase tracking-tighter mb-2 md:mb-6 group-hover:text-brand-red transition-colors leading-tight md:leading-none flex-grow">
                       {product.name}
                     </h3>
                     
-                    <div className="flex items-end justify-between pt-6 border-t border-white/5 mt-auto">
+                    <div className="flex flex-col md:flex-row items-start md:items-end justify-between pt-2 md:pt-6 border-t border-white/5 mt-auto gap-2 md:gap-0">
                       <div className="flex flex-col">
-                        <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Price</span>
-                        <span className="text-2xl font-black tracking-tighter">Rp {product.price.toLocaleString('id-ID')}</span>
+                        <span className="hidden md:block text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Price</span>
+                        <span className="text-xs md:text-2xl font-black tracking-tighter">Rp {product.price.toLocaleString('id-ID')}</span>
                       </div>
                       <Link 
                         to={`/product/${product.id}`}
-                        className="p-4 bg-brand-red/10 text-brand-red rounded-full hover:bg-brand-red hover:text-brand-dark transition-all duration-300 animate-pulse hover:animate-none"
+                        className="p-1.5 md:p-4 bg-brand-red/10 text-brand-red rounded-full hover:bg-brand-red hover:text-brand-dark transition-all duration-300 animate-pulse hover:animate-none self-end md:self-auto"
                       >
-                        <ShoppingBag size={20} />
+                        <ShoppingBag size={14} className="md:w-5 md:h-5" />
                       </Link>
                     </div>
                   </div>
