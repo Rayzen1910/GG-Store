@@ -328,10 +328,10 @@ export default function AccountPage() {
                   </div>
 
                   {wishlist.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6">
                       {products.filter(p => wishlist.includes(p.id)).map((product) => (
-                        <div key={product.id} className="group glass rounded-sm overflow-hidden border-white/5 hover:border-brand-red/50 transition-all duration-500 flex flex-col h-full relative">
-                          <div className="relative overflow-hidden aspect-[4/5]">
+                        <div key={product.id} className="group bg-bg-secondary md:glass rounded-sm overflow-hidden border border-border-subtle md:border-white/5 hover:border-brand-red/50 transition-all duration-500 flex flex-col h-full relative shadow-lg shadow-black/20">
+                          <div className="relative overflow-hidden aspect-square md:aspect-[4/5]">
                             <img 
                               src={product.image} 
                               alt={product.name}
@@ -340,39 +340,33 @@ export default function AccountPage() {
                             />
                             <button
                               onClick={() => toggleWishlist(product.id)}
-                              className="absolute top-4 left-4 p-2.5 rounded-full glass border border-white/10 hover:border-brand-red transition-all cursor-pointer z-20"
+                              className="absolute top-2 left-2 md:top-4 md:left-4 p-2 md:p-2.5 rounded-full glass border border-white/10 hover:border-brand-red transition-all cursor-pointer z-20"
                               aria-label="Remove from Wishlist"
                             >
                               <Heart size={14} className="fill-brand-red text-brand-red" />
                             </button>
                           </div>
                           
-                          <div className="p-6 flex flex-col flex-grow">
-                            <p className="text-brand-red font-mono text-[10px] uppercase tracking-widest mb-2">{product.category}</p>
-                            <h3 className="text-lg font-black italic uppercase tracking-tighter mb-4 leading-none flex-grow">
+                          <div className="p-3 md:p-6 flex flex-col flex-grow">
+                            <div className="flex justify-between items-start mb-1.5 md:mb-2">
+                              <p className="text-brand-red font-mono text-[9px] md:text-[10px] uppercase tracking-widest bg-brand-red/10 px-1.5 py-0.5 rounded-sm">{product.category}</p>
+                            </div>
+                            <h3 className="text-xs md:text-xl font-bold md:font-black md:italic uppercase tracking-tight md:tracking-tighter mb-2 group-hover:text-brand-red transition-colors leading-tight line-clamp-2 flex-grow">
                               {product.name}
                             </h3>
                             
-                            <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-auto">
-                              <span className="text-lg font-black tracking-tighter">Rp {product.price.toLocaleString('id-ID')}</span>
-                              <div className="flex gap-2">
-                                <Link 
-                                  to={`/product/${product.id}`}
-                                  className="px-3 py-1.5 bg-white text-black hover:bg-brand-red hover:text-brand-dark font-black text-[9px] uppercase tracking-tighter rounded-sm transition-colors cursor-pointer"
-                                >
-                                  View Specs
-                                </Link>
-                                <button 
-                                  onClick={() => {
-                                    addToCart(product);
-                                    setNotification(`"${product.name}" added to cart!`);
-                                    setTimeout(() => setNotification(''), 3000);
-                                  }}
-                                  className="p-1.5 bg-brand-red/10 text-brand-red rounded-sm hover:bg-brand-red hover:text-brand-dark transition-all cursor-pointer"
-                                >
-                                  <ShoppingBag size={14} />
-                                </button>
-                              </div>
+                            <div className="flex items-center justify-between mt-auto mb-1">
+                              <span className="text-brand-red font-bold text-sm md:text-xl tracking-tight md:tracking-tighter">Rp {product.price.toLocaleString('id-ID')}</span>
+                              <button 
+                                onClick={() => {
+                                  addToCart(product);
+                                  setNotification(`"${product.name}" added to cart!`);
+                                  setTimeout(() => setNotification(''), 3000);
+                                }}
+                                className="p-1.5 md:p-2.5 bg-brand-red text-brand-dark rounded-full hover:bg-white hover:text-black transition-all cursor-pointer"
+                              >
+                                <ShoppingBag size={14} />
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -458,20 +452,20 @@ export default function AccountPage() {
                     <div>
                       <h2 className="text-2xl font-black italic uppercase tracking-tighter mb-6">Your Products</h2>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         {merchantProducts.map((product) => (
-                          <div key={product.id} className="glass p-6 rounded-sm border-white/5 flex gap-4 items-center">
-                            <img src={product.image} alt={product.name} className="w-20 h-20 object-cover grayscale rounded-sm" />
+                          <div key={product.id} className="glass p-4 md:p-6 rounded-sm border-white/5 flex gap-4 items-start md:items-center">
+                            <img src={product.image} alt={product.name} className="w-16 h-16 md:w-20 md:h-20 object-cover grayscale rounded-sm shrink-0" />
                             <div className="flex-grow">
-                              <span className="text-[9px] font-mono text-brand-red uppercase tracking-wider">{product.category}</span>
-                              <h3 className="text-lg font-black italic uppercase tracking-tighter leading-tight mt-1">{product.name}</h3>
+                              <span className="text-[9px] font-mono text-brand-red uppercase tracking-wider bg-brand-red/10 px-1.5 py-0.5 rounded-sm">{product.category}</span>
+                              <h3 className="text-sm md:text-lg font-bold md:font-black md:italic uppercase tracking-tight md:tracking-tighter leading-tight mt-1 md:mt-2 line-clamp-2">{product.name}</h3>
                               <div className="flex flex-col mt-2 gap-1">
-                                <p className="text-sm font-bold text-brand-red">Rp {product.price.toLocaleString('id-ID')}</p>
+                                <p className="text-sm md:text-md font-bold text-brand-red">Rp {product.price.toLocaleString('id-ID')}</p>
                                 {product.stock !== undefined && (
-                                  <p className="text-xs font-mono text-gray-400">Stock: {product.stock}</p>
+                                  <p className="text-[10px] md:text-xs font-mono text-gray-400">Stock: {product.stock}</p>
                                 )}
                                 {product.variants && product.variants.length > 0 && (
-                                  <div className="flex gap-1 flex-wrap mt-1">
+                                  <div className="flex gap-1 flex-wrap mt-1 hidden md:flex">
                                     {product.variants.map((v, i) => (
                                       <span key={i} className="px-1.5 py-0.5 bg-white/5 rounded-sm text-[8px] font-mono uppercase text-gray-300">
                                         {v}

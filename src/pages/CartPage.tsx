@@ -42,9 +42,9 @@ export default function CartPage() {
                 <motion.div
                   layout
                   key={item.id}
-                  className="flex flex-col sm:flex-row gap-6 p-6 bg-bg-secondary border border-border-subtle rounded-sm group hover:border-text-primary/20 transition-all"
+                  className="flex flex-row gap-4 sm:gap-6 p-4 sm:p-6 bg-bg-secondary border border-border-subtle rounded-sm group hover:border-text-primary/20 transition-all items-start sm:items-stretch"
                 >
-                  <div className="w-full sm:w-40 aspect-square bg-black p-2 rounded-sm overflow-hidden flex-shrink-0">
+                  <div className="w-24 sm:w-40 aspect-square bg-black p-1 sm:p-2 rounded-sm overflow-hidden flex-shrink-0">
                     <img src={item.image} alt={item.name} referrerPolicy="no-referrer" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                   </div>
                   
@@ -62,23 +62,23 @@ export default function CartPage() {
                       </button>
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-between mt-6 sm:mt-0">
-                      <div className="flex items-center border border-border-subtle p-1 rounded-sm bg-bg-primary/40">
+                    <div className="flex flex-col sm:flex-row items-end sm:items-center justify-between mt-4 sm:mt-0 gap-2 sm:gap-0">
+                      <div className="flex items-center border border-border-subtle p-0.5 sm:p-1 rounded-sm bg-bg-primary/40">
                         <button 
                           onClick={() => updateQuantity(item.id, -1)}
-                          className="p-2 hover:text-brand-red transition-colors"
+                          className="p-1.5 sm:p-2 hover:text-brand-red transition-colors"
                         >
-                          <Minus size={16} />
+                          <Minus size={14} className="sm:w-4 sm:h-4" />
                         </button>
-                        <span className="w-12 text-center font-bold text-sm select-none">{item.quantity}</span>
+                        <span className="w-8 sm:w-12 text-center font-bold text-xs sm:text-sm select-none">{item.quantity}</span>
                         <button 
                           onClick={() => updateQuantity(item.id, 1)}
-                          className="p-2 hover:text-brand-red transition-colors"
+                          className="p-1.5 sm:p-2 hover:text-brand-red transition-colors"
                         >
-                          <Plus size={16} />
+                          <Plus size={14} className="sm:w-4 sm:h-4" />
                         </button>
                       </div>
-                      <div className="text-2xl font-black italic tracking-tighter text-right">
+                      <div className="text-lg sm:text-2xl font-black italic tracking-tighter text-right">
                         Rp {(item.price * item.quantity).toLocaleString('id-ID')}
                       </div>
                     </div>
