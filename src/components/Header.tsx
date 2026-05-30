@@ -60,7 +60,7 @@ export default function Header() {
       <div className="flex items-center justify-between px-6 h-20 w-full max-w-7xl mx-auto">
         <div className="flex items-center gap-12">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="text-2xl font-black px-4 py-1 border-2 uppercase tracking-tighter italic transition-all bg-brand-red text-brand-dark border-brand-dark dark:border-brand-red group-hover:bg-text-primary group-hover:text-bg-primary group-hover:border-text-primary">
+            <div className="text-lg sm:text-2xl font-black px-2 sm:px-4 py-1 border-2 uppercase tracking-tighter italic transition-all bg-brand-red text-brand-dark border-brand-dark dark:border-brand-red group-hover:bg-text-primary group-hover:text-bg-primary group-hover:border-text-primary">
               GG STORE
             </div>
           </Link>
@@ -132,25 +132,25 @@ export default function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-4 sm:gap-6">
+        <div className="flex items-center gap-2 sm:gap-4 lg:gap-6">
           {/* Mobile Menu Button */}
           <button 
-            className="lg:hidden p-2 hover:text-brand-red transition-colors mobile-menu-btn"
+            className="lg:hidden p-1.5 sm:p-2 hover:text-brand-red transition-colors mobile-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Mobile Menu"
           >
-            {mobileMenuOpen ? <X size={24} strokeWidth={2.5} /> : <Menu size={24} strokeWidth={2.5} />}
+            {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />}
           </button>
 
           {/* Language Selector Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm hover:bg-white/5 border border-border-subtle/50 text-xs font-mono font-bold uppercase transition-all tracking-wider cursor-pointer z-30 relative"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-sm hover:bg-white/5 border border-border-subtle/50 text-[10px] sm:text-xs font-mono font-bold uppercase transition-all tracking-wider cursor-pointer z-30 relative"
             >
               <Globe size={14} className="opacity-80" />
-              <span>{language.toUpperCase()}</span>
-              <ChevronDown size={12} className={`transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
+              <span className="hidden sm:inline">{language.toUpperCase()}</span>
+              <ChevronDown size={12} className={`transition-transform duration-300 hidden sm:block ${langDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {langDropdownOpen && (
@@ -176,41 +176,40 @@ export default function Header() {
 
           <button 
             onClick={toggleTheme}
-            className="p-2 hover:text-brand-red transition-colors rounded-full cursor-pointer"
+            className="p-1.5 sm:p-2 hover:text-brand-red transition-colors rounded-full cursor-pointer"
             aria-label="Toggle Theme"
           >
-            {theme === 'light' ? <Moon size={22} strokeWidth={2.5} /> : <Sun size={22} strokeWidth={2.5} />}
+            {theme === 'light' ? <Moon className="w-5 h-5 sm:w-5 sm:h-5" strokeWidth={2.5} /> : <Sun className="w-5 h-5 sm:w-5 sm:h-5" strokeWidth={2.5} />}
           </button>
           
-          {/* Auth-aware account icon */}
           {user ? (
             <Link 
               to="/account" 
-              className={`hover:text-brand-red transition-colors relative group ${location.pathname === '/account' ? 'text-brand-red' : ''}`}
+              className={`p-1.5 sm:p-2 hover:text-brand-red transition-colors relative group ${location.pathname === '/account' ? 'text-brand-red' : ''}`}
               title={fullName}
             >
               {initials ? (
-                <div className="w-8 h-8 rounded-full bg-brand-red text-brand-dark text-[11px] font-black flex items-center justify-center border-2 border-transparent group-hover:border-text-primary transition-all">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-red text-brand-dark text-[10px] sm:text-[11px] font-black flex items-center justify-center border-2 border-transparent group-hover:border-text-primary transition-all">
                   {initials}
                 </div>
               ) : (
-                <User size={22} strokeWidth={2.5} />
+                <User className="w-5 h-5 sm:w-5 sm:h-5" strokeWidth={2.5} />
               )}
             </Link>
           ) : (
             <Link 
               to="/auth" 
-              className={`flex items-center gap-1.5 text-xs font-black uppercase tracking-widest hover:text-brand-red transition-colors ${location.pathname === '/auth' ? 'text-brand-red' : ''}`}
+              className={`flex items-center gap-1.5 p-1.5 sm:p-2 text-xs font-black uppercase tracking-widest hover:text-brand-red transition-colors ${location.pathname === '/auth' ? 'text-brand-red' : ''}`}
             >
-              <LogIn size={18} strokeWidth={2.5} />
+              <LogIn className="w-5 h-5 sm:w-5 sm:h-5" strokeWidth={2.5} />
               <span className="hidden sm:inline">{t('login')}</span>
             </Link>
           )}
 
-          <Link to="/cart" className={`relative hover:text-brand-red transition-colors ${location.pathname === '/cart' ? 'text-brand-red' : ''}`}>
-            <ShoppingBag size={22} strokeWidth={2.5} />
+          <Link to="/cart" className={`relative p-1.5 sm:p-2 hover:text-brand-red transition-colors ${location.pathname === '/cart' ? 'text-brand-red' : ''}`}>
+            <ShoppingBag className="w-5 h-5 sm:w-5 sm:h-5" strokeWidth={2.5} />
             {totalCartItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-brand-red text-brand-dark text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-bg-primary transition-colors">
+              <span className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-brand-red text-brand-dark text-[9px] sm:text-[10px] font-black w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center rounded-full border-2 border-bg-primary transition-colors">
                 {totalCartItems}
               </span>
             )}
