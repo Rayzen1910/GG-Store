@@ -142,37 +142,7 @@ export default function Header() {
             {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />}
           </button>
 
-          {/* Language Selector Dropdown */}
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-sm hover:bg-white/5 border border-border-subtle/50 text-[10px] sm:text-xs font-mono font-bold uppercase transition-all tracking-wider cursor-pointer z-30 relative"
-            >
-              <Globe size={14} className="opacity-80" />
-              <span className="hidden sm:inline">{language.toUpperCase()}</span>
-              <ChevronDown size={12} className={`transition-transform duration-300 hidden sm:block ${langDropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
 
-            {langDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-bg-secondary border border-border-subtle rounded-sm shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                {languagesList.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => {
-                      setLanguage(lang.code);
-                      setLangDropdownOpen(false);
-                    }}
-                    className={`w-full flex items-center justify-between px-4 py-3 text-left text-xs font-mono font-bold hover:bg-brand-red hover:text-brand-dark transition-all cursor-pointer ${
-                      language === lang.code ? 'bg-white/5 text-brand-red' : 'text-text-primary'
-                    }`}
-                  >
-                    <span>{lang.name}</span>
-                    <span className="opacity-60 text-[10px]">{lang.code.toUpperCase()}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
 
           <button 
             onClick={toggleTheme}

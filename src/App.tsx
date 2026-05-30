@@ -15,7 +15,6 @@ import AccountPage from './pages/AccountPage.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import CustomCursor from './components/CustomCursor.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
-import AiAssistant from './components/AiAssistant.tsx';
 import SupportPage from './pages/SupportPage.tsx';
 
 import { ThemeProvider } from './context/ThemeContext.tsx';
@@ -49,7 +48,6 @@ export default function App() {
                 {/* Fallback */}
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
-              <AiAssistant />
             </div>
           </Router>
         </AppProvider>

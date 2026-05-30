@@ -78,7 +78,7 @@ export default function HomePage() {
           <div className="mb-10 md:mb-16 border-l-4 border-brand-red pl-4 md:pl-6 flex justify-between items-end">
             <div>
               <h2 className="text-2xl md:text-4xl font-black italic tracking-tighter uppercase">
-                Trending Arsenal
+                Trending Products
               </h2>
               <p className="text-gray-400 font-mono mt-2 uppercase tracking-widest text-[10px] md:text-xs">
                 Top Rated Hardware
@@ -181,7 +181,7 @@ export default function HomePage() {
           
           <div className="mt-8 text-center md:hidden">
             <Link to="/catalog" className="inline-flex items-center gap-2 bg-white/5 px-6 py-3 rounded-sm text-xs font-black uppercase tracking-widest hover:bg-brand-red hover:text-brand-dark transition-colors">
-              View All Arsenal <ArrowRight size={14} />
+              View All Products <ArrowRight size={14} />
             </Link>
           </div>
         </div>
