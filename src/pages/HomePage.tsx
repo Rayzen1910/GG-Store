@@ -48,21 +48,21 @@ export default function HomePage() {
             <span className="text-brand-red font-mono tracking-widest text-sm uppercase mb-4 block">
               {t('newCollection')}
             </span>
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-black italic tracking-tighter mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black italic tracking-tighter mb-6 leading-tight">
               {t('builtFor')}<br />
-              <span className="text-brand-red border-t-2 border-b-2 border-brand-red px-4 text-glow">
+              <span className="text-brand-red border-t-2 border-b-2 border-brand-red px-2 md:px-4 text-glow">
                 {t('precision')}
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-sm sm:text-lg md:text-xl text-gray-400 mb-8 md:mb-10 max-w-2xl mx-auto font-light leading-relaxed">
               {t('heroDesc')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
                 to="/catalog"
-                className="bg-brand-red text-brand-dark px-10 py-5 font-bold rounded-sm flex items-center gap-2 hover:opacity-90 transition-all uppercase tracking-tighter shadow-[0_0_30px_rgba(239,68,68,0.3)]"
+                className="bg-brand-red text-brand-dark px-6 py-4 md:px-10 md:py-5 text-sm md:text-base font-bold rounded-sm flex items-center gap-2 hover:opacity-90 transition-all uppercase tracking-tighter shadow-[0_0_30px_rgba(239,68,68,0.3)]"
               >
-                {t('discoverCollection')} <ArrowRight size={20} />
+                {t('discoverCollection')} <ArrowRight size={20} className="w-4 h-4 md:w-5 md:h-5" />
               </Link>
             </div>
           </motion.div>
@@ -87,11 +87,11 @@ export default function HomePage() {
       {/* Categories / Shop by Style */}
       <section className="py-24 px-6 bg-bg-primary">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16 border-l-4 border-brand-red pl-6">
-            <h2 className="text-4xl font-black italic tracking-tighter uppercase">
+          <div className="mb-10 md:mb-16 border-l-4 border-brand-red pl-4 md:pl-6">
+            <h2 className="text-2xl md:text-4xl font-black italic tracking-tighter uppercase">
               {t('shopByStyle')}
             </h2>
-            <p className="text-gray-400 font-mono mt-2 uppercase tracking-widest text-xs">
+            <p className="text-gray-400 font-mono mt-2 uppercase tracking-widest text-[10px] md:text-xs">
               {t('curatedAesthetics')}
             </p>
           </div>
@@ -158,14 +158,14 @@ export default function HomePage() {
       <section className="py-24 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-brand-red transform -skew-y-3 origin-left z-0" />
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
-          <h2 className="text-brand-dark text-4xl sm:text-5xl md:text-6xl font-black italic tracking-tighter uppercase mb-6 leading-none">
+          <h2 className="text-brand-dark text-3xl sm:text-4xl md:text-6xl font-black italic tracking-tighter uppercase mb-6 leading-none">
             {t('readyToUpgrade')}
           </h2>
           <Link 
             to="/catalog"
-            className="bg-text-primary text-bg-primary px-8 py-5 md:px-16 md:py-6 font-black rounded-sm flex items-center gap-3 hover:opacity-90 transition-all uppercase tracking-tighter shadow-2xl"
+            className="bg-text-primary text-bg-primary px-6 py-4 md:px-16 md:py-6 text-sm md:text-base font-black rounded-sm flex items-center gap-2 md:gap-3 hover:opacity-90 transition-all uppercase tracking-tighter shadow-2xl"
           >
-            {t('goToShop')} <ChevronRight size={24} />
+            {t('goToShop')} <ChevronRight size={24} className="w-5 h-5 md:w-6 md:h-6" />
           </Link>
         </div>
       </section>
