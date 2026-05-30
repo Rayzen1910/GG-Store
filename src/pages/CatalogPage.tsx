@@ -152,7 +152,7 @@ export default function CatalogPage() {
             </div>
 
             {/* Product Grid */}
-            <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
               {processedProducts.map((product, i) => (
                 <motion.div
                   key={product.id}
@@ -160,9 +160,9 @@ export default function CatalogPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: (i % 4) * 0.1 }}
                   viewport={{ once: true }}
-                  className="group glass rounded-sm overflow-hidden border-white/5 hover:border-brand-red/50 transition-all duration-500 flex flex-col h-full relative"
+                  className="group bg-bg-secondary md:glass rounded-sm overflow-hidden border border-border-subtle md:border-white/5 hover:border-brand-red/50 transition-all duration-500 flex flex-col h-full relative shadow-lg shadow-black/20"
                 >
-                  <div className="relative overflow-hidden aspect-[4/5]">
+                  <div className="relative overflow-hidden aspect-square md:aspect-[4/5]">
                     <img 
                       src={product.image} 
                       alt={product.name}
@@ -206,42 +206,47 @@ export default function CatalogPage() {
                       </Link>
                     </div>
                   </div>
-                  <div className="p-2 md:p-8 flex flex-col flex-grow">
-                    <div className="flex justify-between items-start mb-1 md:mb-2 flex-col md:flex-row gap-1">
-                      <p className="text-brand-red font-mono text-[8px] md:text-[10px] uppercase tracking-widest">{product.category}</p>
-                      <div className="flex items-center gap-1 text-[8px] md:text-[10px] text-gray-500 font-black uppercase tracking-widest">
+                  <div className="p-3 md:p-6 flex flex-col flex-grow">
+                    <div className="flex justify-between items-start mb-1.5 md:mb-2">
+                      <p className="text-brand-red font-mono text-[9px] md:text-[10px] uppercase tracking-widest bg-brand-red/10 px-1.5 py-0.5 rounded-sm">{product.category}</p>
+                      <div className="hidden md:flex items-center gap-1 text-[10px] text-gray-500 font-black uppercase tracking-widest">
                         <Star size={10} className="fill-brand-red text-brand-red" />
                         {product.rating}
                       </div>
                     </div>
-                    {product.soldCount !== undefined && (
-                      <div className="flex items-center gap-1.5 mb-3">
-                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-sm text-[9px] font-black uppercase tracking-widest ${
-                          product.soldCount >= 3000
-                            ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
-                            : 'bg-white/5 text-gray-500 border border-white/5'
-                        }`}>
-                          🔥 {product.soldCount.toLocaleString('id-ID')} terjual
-                        </span>
-                      </div>
-                    )}
                     
-                    <h3 className="text-[10px] md:text-2xl font-black italic uppercase tracking-tighter mb-2 md:mb-6 group-hover:text-brand-red transition-colors leading-tight md:leading-none flex-grow">
+                    <h3 className="text-xs md:text-xl font-bold md:font-black md:italic uppercase tracking-tight md:tracking-tighter mb-2 group-hover:text-brand-red transition-colors leading-tight line-clamp-2 flex-grow">
                       {product.name}
                     </h3>
                     
-                    <div className="flex flex-col md:flex-row items-start md:items-end justify-between pt-2 md:pt-6 border-t border-white/5 mt-auto gap-2 md:gap-0">
-                      <div className="flex flex-col">
-                        <span className="hidden md:block text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Price</span>
-                        <span className="text-xs md:text-2xl font-black tracking-tighter">Rp {product.price.toLocaleString('id-ID')}</span>
-                      </div>
+                    <div className="flex items-center justify-between mt-auto mb-1">
+                      <span className="text-brand-red font-bold text-sm md:text-2xl tracking-tight md:tracking-tighter">Rp {product.price.toLocaleString('id-ID')}</span>
                       <Link 
                         to={`/product/${product.id}`}
-                        className="p-1.5 md:p-4 bg-brand-red/10 text-brand-red rounded-full hover:bg-brand-red hover:text-brand-dark transition-all duration-300 animate-pulse hover:animate-none self-end md:self-auto"
+                        className="p-1.5 md:p-3 bg-brand-red text-brand-dark rounded-full hover:bg-white hover:text-black transition-all md:hidden"
                       >
-                        <ShoppingBag size={14} className="md:w-5 md:h-5" />
+                        <ShoppingBag size={14} />
                       </Link>
                     </div>
+
+                    <div className="flex items-center justify-between border-t border-border-subtle md:border-white/5 pt-2 mt-1">
+                      <div className="flex items-center gap-1 text-[9px] md:text-xs text-gray-400">
+                        <Star size={10} className="fill-yellow-500 text-yellow-500" />
+                        {product.rating}
+                      </div>
+                      {product.soldCount !== undefined && (
+                        <span className="text-[9px] md:text-xs text-gray-400">
+                          {product.soldCount >= 1000 ? `${(product.soldCount / 1000).toFixed(1)}k+` : product.soldCount} terjual
+                        </span>
+                      )}
+                    </div>
+                    
+                    <Link 
+                      to={`/product/${product.id}`}
+                      className="hidden md:flex mt-4 w-full bg-brand-red/10 text-brand-red py-2.5 items-center justify-center gap-2 rounded-sm hover:bg-brand-red hover:text-brand-dark transition-all font-black text-[10px] uppercase tracking-[0.1em]"
+                    >
+                      <ShoppingBag size={16} /> View Details
+                    </Link>
                   </div>
                 </motion.div>
               ))}
