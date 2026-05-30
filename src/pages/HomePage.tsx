@@ -213,21 +213,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-24 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-brand-red transform -skew-y-3 origin-left z-0" />
-        <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
-          <h2 className="text-brand-dark text-3xl sm:text-4xl md:text-6xl font-black italic tracking-tighter uppercase mb-6 leading-none">
-            {t('readyToUpgrade')}
-          </h2>
-          <Link 
-            to="/catalog"
-            className="bg-text-primary text-bg-primary px-6 py-4 md:px-16 md:py-6 text-sm md:text-base font-black rounded-sm flex items-center gap-2 md:gap-3 hover:opacity-90 transition-all uppercase tracking-tighter shadow-2xl"
-          >
-            {t('goToShop')} <ChevronRight size={24} className="w-5 h-5 md:w-6 md:h-6" />
-          </Link>
-        </div>
-      </section>
+
 
       <Footer />
     </div>
