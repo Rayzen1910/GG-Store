@@ -14,6 +14,7 @@ export default function SupportPage() {
   const { language } = useLanguage();
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -101,6 +102,19 @@ export default function SupportPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
+    
+    const subject = encodeURIComponent(`Saran GG Store dari ${formData.name}`);
+    const body = encodeURIComponent(
+      `Nama: ${formData.name}\n` +
+      `Email Pengirim: ${formData.email}\n` +
+      `Kategori: ${formData.category}\n\n` +
+      `Pesan Saran:\n${formData.message}`
+    );
+    
+    // Secara otomatis membuka aplikasi email pengguna (seperti Gmail/Outlook) dengan pesan yang sudah terisi
+    window.location.href = `mailto:atar.muhasibi@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Tampilkan pesan sukses di website
     setFormSubmitted(true);
   };
 
@@ -321,10 +335,11 @@ export default function SupportPage() {
 
                   <button
                     type="submit"
-                    className="w-full py-3 bg-brand-red hover:bg-brand-red/90 text-brand-dark font-black text-xs uppercase tracking-widest transition-all rounded-sm flex items-center justify-center gap-2 cursor-pointer border border-brand-red/50 shadow-lg hover:shadow-brand-red/20"
+                    disabled={isSubmitting}
+                    className="w-full py-3 bg-brand-red hover:bg-brand-red/90 text-brand-dark font-black text-xs uppercase tracking-widest transition-all rounded-sm flex items-center justify-center gap-2 cursor-pointer border border-brand-red/50 shadow-lg hover:shadow-brand-red/20 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    <Send size={14} />
-                    <span>{language === 'id' ? 'KIRIM MASUKAN' : language === 'zh' ? '提交意见反馈' : 'SUBMIT FEEDBACK'}</span>
+                    <Send size={14} className={isSubmitting ? "animate-pulse" : ""} />
+                    <span>{isSubmitting ? (language === 'id' ? 'MENGIRIM...' : language === 'zh' ? '发送中...' : 'SENDING...') : (language === 'id' ? 'KIRIM MASUKAN' : language === 'zh' ? '提交意见反馈' : 'SUBMIT FEEDBACK')}</span>
                   </button>
                 </motion.form>
               ) : (
